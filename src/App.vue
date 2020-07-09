@@ -1,56 +1,70 @@
-<template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+<template lang="pug">
+  v-app
+    v-navigation-drawer(v-model="barraLateral" color="primary" app dark temporary)
+      v-list
+        v-list-item
+          v-list-item-avatar
+            v-img(src="https://randomuser.me/api/portraits/lego/5.jpg")
+          v-list-item-content
+            v-list-item-title André P.
+            v-list-item-subtitle Inscrito
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      v-divider
 
-      <v-spacer></v-spacer>
+      v-list
+        v-list-item
+          v-list-item-icon
+            v-icon mdi-book-account
+          v-list-item-content
+            v-list-item-title Calificaciones
+        v-list-item
+          v-list-item-icon
+            v-icon mdi-table-clock
+          v-list-item-content
+            v-list-item-title Horario
+        v-list-item
+          v-list-item-icon
+            v-icon mdi-account-group
+          v-list-item-content
+            v-list-item-title Reinscripciones
+        v-list-item
+          v-list-item-icon
+            v-icon mdi-teach
+          v-list-item-content
+            v-list-item-title Evaluar profesores
+    v-app-bar(app color="primary" dark)
+      v-app-bar-nav-icon.d-sm-none(@click="barraLateral = !barraLateral")
+      v-toolbar-title.pa-0 Plataforma concept
+      v-toolbar-items.d-none.d-sm-flex
+        v-btn.text-capitalize(text) Calificaciones
+        v-btn.text-capitalize(text) Horario
+        v-btn.text-capitalize(text) Reinscripciones
+        v-btn.text-capitalize(text) Evaluar profesores
 
-      <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+      v-spacer
 
-    <v-content>
-      <HelloWorld />
-      <test-pug></test-pug>
-    </v-content>
-  </v-app>
+      v-btn(icon)
+        v-icon mdi-calendar
+      v-btn(icon)
+        v-icon mdi-bell
+      v-btn(icon).d-none.d-sm-flex
+        v-icon mdi-account-circle-outline
+    v-main
+      router-view
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
-import TestPug from "./components/TestPug.vue";
 
 export default Vue.extend({
   name: "App",
 
-  components: {
-    HelloWorld,
-    TestPug
-  },
+  components: {},
 
-  data: () => ({
-    //
-  })
+  data() {
+    return {
+      barraLateral: false
+    };
+  }
 });
 </script>
