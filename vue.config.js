@@ -5,5 +5,10 @@ module.exports = {
       args[0].title = "Plataforma-concept";
       return args;
     });
+
+    config.plugin("fork-ts-checker").tap(args => {
+      args[0].workers = 4;
+      return args;
+    });
   }
 };

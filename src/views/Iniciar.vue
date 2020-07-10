@@ -5,13 +5,25 @@
         v-card
           v-card-title Bienvenido
           v-card-text
-            v-form(@submit.prevent="iniciarSesion()")
-              v-text-field(v-model="usuario" label="Boleta/Número de empleado/P.P./P.E." tabindex="1" clearable)
-              v-text-field(v-model="clave" label="Contraseña" type="password" tabindex="2")
+            v-form(ref="formLogin" @submit.prevent="iniciarSesion()" v-model="usuarioValido")
+              v-text-field(
+                v-model="usuario"
+                label="Boleta/Número de empleado/P.P./P.E."
+                tabindex="1"
+                :rules="[reglas.usuarioVacio]"
+                clearable
+              )
+              v-text-field(
+                v-model="clave"
+                label="Contraseña"
+                type="password"
+                tabindex="2"
+                :rules="[reglas.claveVacia]"
+              )
               v-checkbox(v-model="recordar" label="Recuérdame")
-              v-btn.primary(type="submit" tabindex="3" block rounded) Iniciar sesión
+              v-btn.primary(type="submit" tabindex="3" :loading="cargando" block rounded) Iniciar sesión
               div.text-center.mt-4
-                v-btn(text color="info" link) ¿Olvidaste tu contraseña?
+                v-btn(text color="info" to="/reestablecer-clave") ¿Olvidaste tu contraseña?
       v-col(md=4)
         v-expansion-panels(accordion)
           v-expansion-panel
@@ -29,18 +41,31 @@
           
       v-spacer
     aviso(:activo="dialogoActivo" :notificacion="notifDialog" @cerrarDialog="dialogoActivo = false")
+    v-snackbar(v-model="errorServidor" top centered timeout="3000") {{errorMensaje}}
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Aviso from "../components/Aviso.vue";
-import { Notificacion } from "../dto/dto";
+import { Notificacion } from "../utils/tipos";
+import { Login } from "../services/Login";
 export default Vue.extend({
   data() {
     return {
       usuario: "",
       clave: "",
       recordar: false,
+      usuarioValido: false,
+      reglas: {
+        usuarioVacio: (usuario: string) => {
+          const blank = /\S+/;
+          return blank.test(usuario) || "Usuario incorrecto";
+        },
+        claveVacia: (usuario: string) => {
+          const blank = /\S+/;
+          return blank.test(usuario) || "La clave no puede estar vacía";
+        }
+      },
       notificaciones: [
         {
           _id: 123456543223,
@@ -66,7 +91,10 @@ export default Vue.extend({
         }
       ],
       dialogoActivo: false,
-      notifDialog: null
+      notifDialog: null,
+      cargando: false,
+      errorServidor: null,
+      errorMensaje: ""
     };
   },
   methods: {
@@ -75,10 +103,29 @@ export default Vue.extend({
       this.$data.notifDialog = notificacion;
       this.$data.dialogoActivo = true;
     },
-    iniciarSesion() {
-      alert(
-        "Esto es un demo. No te preocupes si ingresaste datos reales, no irán a ningún lado"
+    async iniciarSesion() {
+      (this.$refs.formLogin as Vue & {
+        validate: () => boolean;
+      }).validate();
+
+      if (!this.$data.usuarioValido) {
+        return;
+      }
+
+      this.$data.cargando = true;
+      const { usuario, clave } = this.$data;
+      const { status, message } = await Login.iniciarSesion(
+        usuario.trim(),
+        clave
       );
+      if (status !== 200) {
+        this.$data.errorServidor = true;
+        this.$data.errorMensaje = message;
+      } else {
+        this.$data.errorMensaje = message;
+        this.$router.replace("/");
+      }
+      this.$data.cargando = false;
     }
   },
   components: {
