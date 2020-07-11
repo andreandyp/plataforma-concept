@@ -1,56 +1,113 @@
-<template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+<template lang="pug">
+  v-app
+    v-navigation-drawer(v-model="barraLateral" color="primary" app dark temporary)
+      v-list
+        v-list-item
+          v-list-item-avatar
+            v-img(src="https://randomuser.me/api/portraits/lego/5.jpg")
+          v-list-item-content
+            v-list-item-title André P.
+            v-list-item-subtitle Inscrito
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      v-divider
 
-      <v-spacer></v-spacer>
+      v-list
+        v-list-item
+          v-list-item-icon
+            v-icon mdi-book-account
+          v-list-item-content
+            v-list-item-title Calificaciones
+        v-list-item
+          v-list-item-icon
+            v-icon mdi-table-clock
+          v-list-item-content
+            v-list-item-title Horario
+        v-list-item
+          v-list-item-icon
+            v-icon mdi-account-group
+          v-list-item-content
+            v-list-item-title Reinscripciones
+        v-list-item
+          v-list-item-icon
+            v-icon mdi-teach
+          v-list-item-content
+            v-list-item-title Evaluar profesores
+    v-app-bar(app color="primary" dark)
+      v-app-bar-nav-icon.d-sm-none(@click="barraLateral = !barraLateral" v-show="sesionIniciada")
+      v-toolbar-title.pa-0
+        router-link(to="/") Plataforma concept
+      v-toolbar-items.hidden-xs-only(v-show="sesionIniciada")
+        v-btn.text-capitalize(text) Calificaciones
+        v-btn.text-capitalize(text) Horario
+        v-btn.text-capitalize(text) Reinscripciones
+        v-btn.text-capitalize(text) Evaluar profesores
 
-      <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+      v-spacer
 
-    <v-content>
-      <HelloWorld />
-      <test-pug></test-pug>
-    </v-content>
-  </v-app>
+      v-btn(
+        href="https://www.ipn.mx/calendario-academico.html"
+        target="_blank"
+        rel="noopener noreferrer"
+        icon
+      )
+        v-icon mdi-calendar
+      v-btn(v-show="sesionIniciada" icon)
+        v-icon mdi-bell
+      v-btn.hidden-xs-only(v-show="sesionIniciada" icon)
+        v-icon mdi-account-circle-outline
+    v-main
+      router-view
+    v-footer
+      span Creado por André Michel Pozos. 
+        | Esta app es sólo un concepto, no envía los datos ingresados
+        | a ningún servidor.
+        br
+        a(href="https://twitter.com/andreandyp") Twitter
+        |  
+        a(href="https://github.com/andreandyp/plataforma-concept") GitHub
+        |  - Versión 0.2.0
+      v-spacer
+      v-btn(color="blue" @click="cerrarSesion" v-show="sesionIniciada" text) Cerrar sesión
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
-import TestPug from "./components/TestPug.vue";
+import { Login } from "./services/Login";
+import { DatosSesion } from "./utils/tipos";
 
 export default Vue.extend({
   name: "App",
-
-  components: {
-    HelloWorld,
-    TestPug
+  data() {
+    return {
+      barraLateral: false
+    };
   },
+  computed: {
+    sesionIniciada(): boolean {
+      return this.$store.getters.sesionIniciada;
+    }
+  },
+  async created() {
+    const respuesta = await Login.sesionIniciada();
+    const { status, message } = respuesta as DatosSesion;
 
-  data: () => ({
-    //
-  })
+    if (status === 200) {
+      this.$store.commit("iniciarSesion", message);
+    }
+  },
+  methods: {
+    async cerrarSesion() {
+      await Login.cerrarSesion();
+      this.$store.commit("cerrarSesion");
+      this.$router.push("/iniciar");
+    }
+  }
 });
 </script>
+
+<style scoped>
+a.router-link-active {
+  color: white;
+  text-decoration: none;
+}
+</style>
