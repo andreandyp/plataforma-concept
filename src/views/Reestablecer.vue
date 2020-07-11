@@ -9,7 +9,7 @@
               v-text-field(
                 label="Ingresa tu boleta/No. de empleado/P.P./P.E."
                 v-model="usuario"
-                :rules="[reglas.vacio]"
+                :rules="[reglas.usuarioVacio]"
                 required
               )
               .text-right
@@ -34,12 +34,17 @@ export default Vue.extend({
       usuarioNoExiste: null,
       cargando: false,
       reglas: {
-        usuario: (usuario: string) => {
+        usuarioVacio: (usuario: string): boolean | string => {
           const blank = /\S+/;
           return blank.test(usuario) || "Usuario incorrecto";
         }
       }
     };
+  },
+  created() {
+    if (this.$store.getters.sesionIniciada) {
+      return this.$router.replace("/");
+    }
   },
   methods: {
     async enviarCodigo() {
@@ -52,9 +57,7 @@ export default Vue.extend({
       }
 
       this.$data.cargando = true;
-      const { status, message } = await Login.reestablecerClave(
-        this.$data.usuario.trim()
-      );
+      const { status, message } = await Login.reestablecerClave(this.$data.usuario.trim());
       this.$data.cargando = false;
 
       if (status !== 200) {

@@ -11,4 +11,25 @@ type ResponseServer = {
   message: string;
 };
 
-export { Notificacion, ResponseServer };
+type Sesion = {
+  usuario: string;
+  nombre: string;
+  estado: string | null;
+  tipo: string;
+};
+
+type DatosSesion = {
+  status: number;
+  message: Sesion;
+};
+
+type UsuarioDB = {
+  usuario: string;
+  contraseña: string;
+  email: string;
+  nombre: string;
+  estado: string | null;
+  tipo: string;
+};
+
+export { Notificacion, ResponseServer, DatosSesion, UsuarioDB, Sesion };

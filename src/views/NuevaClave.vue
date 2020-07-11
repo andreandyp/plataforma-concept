@@ -41,11 +41,11 @@ export default Vue.extend({
       claveDiferente: null,
       cargando: false,
       reglas: {
-        vacio: (clave: string) => {
+        vacio: (clave: string): boolean | string => {
           const blank = /\S+/;
           return blank.test(clave) || "La clave no puede estar vacía";
         },
-        longitud: (clave: string) => {
+        longitud: (clave: string): boolean | string => {
           return (
             (clave.length > 8 && clave.length < 32) ||
             "La clave debe ser mayor a 8 caracteres y menos a 32"
@@ -62,6 +62,11 @@ export default Vue.extend({
       return this.$route.params.id;
     }
   },
+  created() {
+    if (this.$store.getters.sesionIniciada) {
+      return this.$router.replace("/");
+    }
+  },
   methods: {
     async guardarClave() {
       (this.$refs.formNuevaClave as Vue & {
@@ -72,10 +77,7 @@ export default Vue.extend({
         this.$data.claveDiferente = true;
       } else {
         this.$data.cargando = true;
-        const { status, message } = await Login.guardarNuevaContraseña(
-          clave1,
-          clave2
-        );
+        const { status, message } = await Login.guardarNuevaContraseña(clave1, clave2);
         this.$data.cargando = false;
         if (status === 200) {
           this.$data.contraseñasCambiadas = true;

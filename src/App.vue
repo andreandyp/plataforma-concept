@@ -33,9 +33,10 @@
           v-list-item-content
             v-list-item-title Evaluar profesores
     v-app-bar(app color="primary" dark)
-      v-app-bar-nav-icon.d-sm-none(@click="barraLateral = !barraLateral")
-      v-toolbar-title.pa-0 Plataforma concept
-      v-toolbar-items.d-none.d-sm-flex
+      v-app-bar-nav-icon.d-sm-none(@click="barraLateral = !barraLateral" v-show="sesionIniciada")
+      v-toolbar-title.pa-0
+        router-link(to="/") Plataforma concept
+      v-toolbar-items.hidden-xs-only(v-show="sesionIniciada")
         v-btn.text-capitalize(text) Calificaciones
         v-btn.text-capitalize(text) Horario
         v-btn.text-capitalize(text) Reinscripciones
@@ -43,28 +44,62 @@
 
       v-spacer
 
-      v-btn(icon)
+      v-btn(
+        href="https://www.ipn.mx/calendario-academico.html"
+        target="_blank"
+        rel="noopener noreferrer"
+        icon
+      )
         v-icon mdi-calendar
-      v-btn(icon)
+      v-btn(v-show="sesionIniciada" icon)
         v-icon mdi-bell
-      v-btn(icon).d-none.d-sm-flex
+      v-btn.hidden-xs-only(v-show="sesionIniciada" icon)
         v-icon mdi-account-circle-outline
     v-main
       router-view
+    v-footer
+      v-spacer
+      v-btn(color="blue" @click="cerrarSesion" v-show="sesionIniciada" text) Cerrar sesión
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { Login } from "./services/Login";
+import { DatosSesion } from "./utils/tipos";
 
 export default Vue.extend({
   name: "App",
-
-  components: {},
-
   data() {
     return {
       barraLateral: false
     };
+  },
+  computed: {
+    sesionIniciada(): boolean {
+      return this.$store.getters.sesionIniciada;
+    }
+  },
+  async created() {
+    const respuesta = await Login.sesionIniciada();
+    const { status, message } = respuesta as DatosSesion;
+
+    if (status === 200) {
+      this.$store.commit("iniciarSesion", message);
+    }
+  },
+  methods: {
+    async cerrarSesion() {
+      await Login.cerrarSesion();
+      this.$store.commit("cerrarSesion");
+      this.$router.push("/iniciar");
+    }
   }
 });
 </script>
+
+<style scoped>
+a.router-link-active {
+  color: white;
+  text-decoration: none;
+}
+</style>

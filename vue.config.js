@@ -7,7 +7,7 @@ module.exports = {
     });
 
     config.plugin("fork-ts-checker").tap(args => {
-      args[0].workers = 4;
+      args[0].workers = 2;
       return args;
     });
   }
