@@ -58,6 +58,14 @@
     v-main
       router-view
     v-footer
+      span Creado por André Michel Pozos. 
+        | Esta app es sólo un concepto, no envía los datos ingresados
+        | a ningún servidor.
+        br
+        a(href="https://twitter.com/andreandyp") Twitter
+        |  
+        a(href="https://github.com/andreandyp/plataforma-concept") GitHub
+        |  - Versión 0.2.0
       v-spacer
       v-btn(color="blue" @click="cerrarSesion" v-show="sesionIniciada" text) Cerrar sesión
 </template>

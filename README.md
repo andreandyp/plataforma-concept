@@ -8,26 +8,25 @@ Es por eso que he decidido crear un concepto de cómo me gustaría que fuese est
 
 Esto es sólo un concepto que probablemente no llegará a implementarse, debido a la complicadísima burocracia que existe en mi escuela. Hago todo esto por diversión y para aprender a usar Vuetify y TypeScript.
 
-## Project setup
+## Sugerencias o problemas
+
+Envíame un tuit o abre un issue aquí en GitHub.
+Consulta el progreso actual [aquí](https://github.com/andreandyp/plataforma-concept/projects/1).
+
+### Instalar app
 
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### Compilar para desarollo (incluye hot-reloading)
 
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### Compilar y minificar para producción
 
 ```
 yarn build
-```
-
-### Lints and fixes files
-
-```
-yarn lint
 ```
