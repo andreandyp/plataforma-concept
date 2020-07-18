@@ -16,6 +16,7 @@ module.exports = {
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "vue/max-len": ["warn", { code: 100, tabWidth: 2 }]
+    "vue/max-len": ["warn", { code: 100, tabWidth: 2 }],
+    "@typescript-eslint/ban-ts-ignore": "off"
   }
 };

@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Login } from "../services/Login";
+import { LoginAPI } from "../services/LoginAPI";
 export default Vue.extend({
   data() {
     return {
@@ -77,7 +77,7 @@ export default Vue.extend({
         this.$data.claveDiferente = true;
       } else {
         this.$data.cargando = true;
-        const { status, message } = await Login.guardarNuevaContraseña(clave1, clave2);
+        const { status, message } = await LoginAPI.guardarNuevaContraseña(clave1, clave2);
         this.$data.cargando = false;
         if (status === 200) {
           this.$data.contraseñasCambiadas = true;
