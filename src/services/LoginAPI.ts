@@ -1,8 +1,8 @@
-import { sleep } from "../utils/funciones";
-import { ResponseServer, DatosSesion, Sesion } from "../utils/tipos";
-import { db } from "./FalsaBD";
+import { sleep } from "@/utils/funciones";
+import { ResponseServer, DatosSesion, Sesion, UsuarioDB } from "@/utils/tipos";
+import { usuarios } from "@/db/UsuariosDB";
 
-export class Login {
+export class LoginAPI {
   static async sesionIniciada(): Promise<ResponseServer | DatosSesion> {
     const usuario = localStorage.getItem("sesion");
     if (usuario === null) {
@@ -22,7 +22,7 @@ export class Login {
     clave: string
   ): Promise<ResponseServer | DatosSesion> {
     await sleep(1500);
-    const user = db.find(elem => elem.usuario === usuario);
+    const user = usuarios.find((elem: UsuarioDB) => elem.usuario === usuario);
     if (!user) {
       return {
         status: 400,
@@ -52,7 +52,7 @@ export class Login {
 
   static async reestablecerClave(usuario: string): Promise<ResponseServer> {
     await sleep(1500);
-    const user = db.find(elem => elem.usuario === usuario);
+    const user = usuarios.find((elem: UsuarioDB) => elem.usuario === usuario);
     if (user) {
       const parteCensurada = user.email.slice(1, user.email.indexOf("@"));
       const patron = new RegExp(parteCensurada);

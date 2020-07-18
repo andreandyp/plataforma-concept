@@ -12,7 +12,7 @@
       v-divider
 
       v-list
-        v-list-item
+        v-list-item(to="/calificaciones")
           v-list-item-icon
             v-icon mdi-book-account
           v-list-item-content
@@ -35,9 +35,9 @@
     v-app-bar(app color="primary" dark)
       v-app-bar-nav-icon.d-sm-none(@click="barraLateral = !barraLateral" v-show="sesionIniciada")
       v-toolbar-title.pa-0
-        router-link(to="/") Plataforma concept
+        router-link.mr-2(to="/") Plataforma concept
       v-toolbar-items.hidden-xs-only(v-show="sesionIniciada")
-        v-btn.text-capitalize(text) Calificaciones
+        v-btn.text-capitalize(to="/calificaciones" text) Calificaciones
         v-btn.text-capitalize(text) Horario
         v-btn.text-capitalize(text) Reinscripciones
         v-btn.text-capitalize(text) Evaluar profesores
@@ -63,16 +63,16 @@
         | a ningún servidor.
         br
         a(href="https://twitter.com/andreandyp") Twitter
-        |  
+        |  | 
         a(href="https://github.com/andreandyp/plataforma-concept") GitHub
-        |  - Versión 0.2.0
+        |  - Versión 0.3.0
       v-spacer
       v-btn(color="blue" @click="cerrarSesion" v-show="sesionIniciada" text) Cerrar sesión
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Login } from "./services/Login";
+import { LoginAPI } from "./services/LoginAPI";
 import { DatosSesion } from "./utils/tipos";
 
 export default Vue.extend({
@@ -88,7 +88,7 @@ export default Vue.extend({
     }
   },
   async created() {
-    const respuesta = await Login.sesionIniciada();
+    const respuesta = await LoginAPI.sesionIniciada();
     const { status, message } = respuesta as DatosSesion;
 
     if (status === 200) {
@@ -97,7 +97,7 @@ export default Vue.extend({
   },
   methods: {
     async cerrarSesion() {
-      await Login.cerrarSesion();
+      await LoginAPI.cerrarSesion();
       this.$store.commit("cerrarSesion");
       this.$router.push("/iniciar");
     }

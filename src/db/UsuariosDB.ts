@@ -1,6 +1,6 @@
 import { UsuarioDB } from "../utils/tipos";
 
-const db: Array<UsuarioDB> = [
+export const usuarios: Array<UsuarioDB> = [
   {
     usuario: "andre",
     contraseña: "andre",
@@ -18,5 +18,3 @@ const db: Array<UsuarioDB> = [
     tipo: "profesor"
   }
 ];
-
-export { db };

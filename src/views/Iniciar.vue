@@ -59,7 +59,7 @@
 import Vue from "vue";
 import Aviso from "../components/Aviso.vue";
 import { Notificacion, DatosSesion } from "../utils/tipos";
-import { Login } from "../services/Login";
+import { LoginAPI } from "../services/LoginAPI";
 export default Vue.extend({
   data() {
     return {
@@ -131,7 +131,7 @@ export default Vue.extend({
 
       this.$data.cargando = true;
       const { usuario, clave } = this.$data;
-      const respuesta = await Login.iniciarSesion(usuario.trim(), clave);
+      const respuesta = await LoginAPI.iniciarSesion(usuario.trim(), clave);
       const { status, message } = respuesta as DatosSesion;
       if (status !== 200) {
         this.$data.errorServidor = true;

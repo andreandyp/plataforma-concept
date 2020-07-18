@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Login } from "../services/Login";
+import { LoginAPI } from "../services/LoginAPI";
 export default Vue.extend({
   data() {
     return {
@@ -57,7 +57,7 @@ export default Vue.extend({
       }
 
       this.$data.cargando = true;
-      const { status, message } = await Login.reestablecerClave(this.$data.usuario.trim());
+      const { status, message } = await LoginAPI.reestablecerClave(this.$data.usuario.trim());
       this.$data.cargando = false;
 
       if (status !== 200) {
