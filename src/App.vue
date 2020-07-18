@@ -2,7 +2,7 @@
   v-app
     v-navigation-drawer(v-model="barraLateral" color="primary" app dark temporary)
       v-list
-        v-list-item
+        v-list-item(to="/expediente")
           v-list-item-avatar
             v-img(src="https://randomuser.me/api/portraits/lego/5.jpg")
           v-list-item-content
@@ -53,8 +53,18 @@
         v-icon mdi-calendar
       v-btn(v-show="sesionIniciada" icon)
         v-icon mdi-bell
-      v-btn.hidden-xs-only(v-show="sesionIniciada" icon)
-        v-icon mdi-account-circle-outline
+      v-menu(bottom offset-y)
+        template(v-slot:activator="{ on, attrs }")
+          v-btn.hidden-xs-only(v-show="sesionIniciada" v-bind="attrs" v-on="on" icon)
+            v-icon mdi-account-circle-outline
+        v-card
+          v-list
+            v-list-item(to="/expediente")
+              v-list-item-avatar
+                v-img(src="https://randomuser.me/api/portraits/lego/5.jpg")
+              v-list-item-content
+                v-list-item-title André P.
+                v-list-item-subtitle Inscrito
     v-main
       router-view
     v-footer
@@ -65,7 +75,7 @@
         a(href="https://twitter.com/andreandyp") Twitter
         |  | 
         a(href="https://github.com/andreandyp/plataforma-concept") GitHub
-        |  - Versión 0.3.0
+        |  - Versión 0.4.0
       v-spacer
       v-btn(color="blue" @click="cerrarSesion" v-show="sesionIniciada" text) Cerrar sesión
 </template>

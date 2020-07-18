@@ -3,7 +3,8 @@
     h2.d-flex.justify-space-between Tus calificaciones del semestre
       v-btn(@click="actualizarCalificaciones()" :loading="cargando" icon)
         v-icon mdi-sync
-    v-simple-table(:class="{cargando: cargando}" fixed-header dense)
+    v-skeleton-loader(v-if="cargando" type="table-tbody" max-height="300")
+    v-simple-table(v-else :class="{cargando: cargando}" fixed-header dense)
       thead
         tr
           th(v-for="periodo in periodos") {{periodo}}

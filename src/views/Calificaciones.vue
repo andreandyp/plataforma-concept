@@ -25,7 +25,8 @@
                 )
                   v-icon mdi-sync
               span Actualizar
-        v-simple-table(:class="{cargando: cargandoCalifs}" fixed-header dense)
+        v-skeleton-loader(v-if="cargandoCalifs" type="table-tbody" max-height="150")
+        v-simple-table(v-else :class="{cargando: cargandoCalifs}" fixed-header dense)
           thead
             tr
               th.text-center(v-for="header in califHeaders") {{header}}
@@ -40,7 +41,8 @@
         h2.d-flex.justify-space-between Calificaciones de ETS
           v-btn(@click="actualizarETS()" :loading="cargandoETS" icon)
             v-icon mdi-sync
-        v-simple-table(:class="{cargando: cargandoETS}" fixed-header dense)
+        v-skeleton-loader(v-if="cargandoETS" type="table-tbody" max-height="100")
+        v-simple-table(v-else :class="{cargando: cargandoETS}" fixed-header dense)
           thead
             tr
               th.text-center(v-for="header in etsHeaders") {{header}}
@@ -54,7 +56,8 @@
     v-row
       v-col
         h2 Kardex
-        v-row
+        v-skeleton-loader(v-if="cargandoKardex" type="table" max-height="400")
+        v-row(v-else)
           v-col(v-for="(nivel, index) in kardex" :key="index" md="6")
             v-simple-table.kardex(
               :class="{cargando: cargandoKardex}"
