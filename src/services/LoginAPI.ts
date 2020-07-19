@@ -8,13 +8,13 @@ export class LoginAPI {
     if (usuario === null) {
       return {
         status: 401,
-        message: "No ha iniciado sesión"
+        message: "No ha iniciado sesión",
       };
     }
 
     return {
       status: 200,
-      message: JSON.parse(usuario)
+      message: JSON.parse(usuario),
     };
   }
   static async iniciarSesion(
@@ -26,13 +26,13 @@ export class LoginAPI {
     if (!user) {
       return {
         status: 400,
-        message: "El usuario no existe"
+        message: "El usuario no existe",
       };
     }
     if (user.contraseña !== clave) {
       return {
         status: 400,
-        message: "La contraseña no es correcta"
+        message: "La contraseña no es correcta",
       };
     }
 
@@ -40,13 +40,13 @@ export class LoginAPI {
       usuario: user.usuario,
       nombre: user.nombre,
       estado: user.estado,
-      tipo: user.tipo
+      tipo: user.tipo,
     };
     localStorage.setItem("sesion", JSON.stringify(sesion));
 
     return {
       status: 200,
-      message: sesion
+      message: sesion,
     };
   }
 
@@ -58,13 +58,13 @@ export class LoginAPI {
       const patron = new RegExp(parteCensurada);
       return {
         status: 200,
-        message: user.email.replace(patron, "*".repeat(parteCensurada.length))
+        message: user.email.replace(patron, "*".repeat(parteCensurada.length)),
       };
     }
 
     return {
       status: 404,
-      message: "No existe el usuario"
+      message: "No existe el usuario",
     };
   }
 
@@ -73,17 +73,17 @@ export class LoginAPI {
     if (clave1 === clave2) {
       return {
         status: 200,
-        message: "Contraseña guardada"
+        message: "Contraseña guardada",
       };
     }
 
     return {
       status: 400,
-      message: "Las contraseñas no coinciden"
+      message: "Las contraseñas no coinciden",
     };
   }
 
-  static async cerrarSesion() {
+  static async cerrarSesion(): Promise<void> {
     localStorage.removeItem("sesion");
   }
 }

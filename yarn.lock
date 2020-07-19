@@ -8509,13 +8509,6 @@ vue-pull-refresh@^0.2.7:
   dependencies:
     vue "^2.0.1"
 
-vue-pull-refresh@^0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/vue-pull-refresh/-/vue-pull-refresh-0.2.7.tgz#ee4025fed2c2ff32390153a0ae2fcb86d5eeded6"
-  integrity sha512-SN0DxNeKrcgduybhHrUgHPHiyjHlfLN29ycslfiV/NeQ5qgDaB3COl1m30cpcqQgk0+pKcCUsygdKrj3qB0AFw==
-  dependencies:
-    vue "^2.0.1"
-
 vue-router@^3.2.0:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.3.4.tgz#4e38abc34a11c41b6c3d8244449a2e363ba6250b"

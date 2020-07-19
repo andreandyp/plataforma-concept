@@ -25,73 +25,70 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return {
-      documentos: [
-        {
-          nombre: "Acta de nacimiento",
-          status: 3,
-          notas: "Ninguna"
-        },
-        {
-          nombre: "CURP",
-          status: 3,
-          notas: "Ninguna"
-        },
-        {
-          nombre: "Identificación oficial",
-          status: 3,
-          notas: "Ninguna"
-        },
-        {
-          nombre: "Credencial de la escuela",
-          status: 2,
-          notas: "Ninguna"
-        },
-        {
-          nombre: "Certificado de estudios",
-          status: 1,
-          notas: "Retrasado por pandemia"
-        },
-        {
-          nombre: "Comprobante de domicilio",
-          status: 0,
-          notas: "El documento es mayor a 3 meses"
-        }
-      ]
-    };
-  },
-  methods: {
-    estadoDocumento(estado: number): string {
-      switch (estado) {
-        case 0:
-          return "No disponible";
-        case 1:
-          return "Solicitado";
-        case 2:
-          return "En proceso";
-        case 3:
-          return "Disponible";
-        default:
-          return "";
-      }
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class DocumentosTab extends Vue {
+  documentos = [
+    {
+      nombre: "Acta de nacimiento",
+      status: 3,
+      notas: "Ninguna",
     },
-    colorEstado(estado: number): string {
-      switch (estado) {
-        case 0:
-          return "black";
-        case 1:
-          return "red";
-        case 2:
-          return "yellow darken-2";
-        case 3:
-          return "green";
-        default:
-          return "";
-      }
+    {
+      nombre: "CURP",
+      status: 3,
+      notas: "Ninguna",
+    },
+    {
+      nombre: "Identificación oficial",
+      status: 3,
+      notas: "Ninguna",
+    },
+    {
+      nombre: "Credencial de la escuela",
+      status: 2,
+      notas: "Ninguna",
+    },
+    {
+      nombre: "Certificado de estudios",
+      status: 1,
+      notas: "Retrasado por pandemia",
+    },
+    {
+      nombre: "Comprobante de domicilio",
+      status: 0,
+      notas: "El documento es mayor a 3 meses",
+    },
+  ];
+
+  estadoDocumento(estado: number): string {
+    switch (estado) {
+      case 0:
+        return "No disponible";
+      case 1:
+        return "Solicitado";
+      case 2:
+        return "En proceso";
+      case 3:
+        return "Disponible";
+      default:
+        return "";
     }
   }
-});
+  colorEstado(estado: number): string {
+    switch (estado) {
+      case 0:
+        return "black";
+      case 1:
+        return "red";
+      case 2:
+        return "yellow darken-2";
+      case 3:
+        return "green";
+      default:
+        return "";
+    }
+  }
+}
 </script>

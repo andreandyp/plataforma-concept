@@ -75,44 +75,39 @@
         a(href="https://twitter.com/andreandyp") Twitter
         |  | 
         a(href="https://github.com/andreandyp/plataforma-concept") GitHub
-        |  - Versión 0.4.0
+        |  - Versión 0.4.2
       v-spacer
       v-btn(color="blue" @click="cerrarSesion" v-show="sesionIniciada" text) Cerrar sesión
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { LoginAPI } from "./services/LoginAPI";
-import { DatosSesion } from "./utils/tipos";
+import { Vue, Component } from "vue-property-decorator";
+import { LoginAPI } from "@/services/LoginAPI";
+import { DatosSesion } from "@/utils/tipos";
 
-export default Vue.extend({
+@Component({
   name: "App",
-  data() {
-    return {
-      barraLateral: false
-    };
-  },
-  computed: {
-    sesionIniciada(): boolean {
-      return this.$store.getters.sesionIniciada;
-    }
-  },
-  async created() {
+})
+export default class App extends Vue {
+  barraLateral = false;
+
+  get sesionIniciada(): boolean {
+    return this.$store.getters.sesionIniciada;
+  }
+  async created(): Promise<void> {
     const respuesta = await LoginAPI.sesionIniciada();
     const { status, message } = respuesta as DatosSesion;
 
     if (status === 200) {
       this.$store.commit("iniciarSesion", message);
     }
-  },
-  methods: {
-    async cerrarSesion() {
-      await LoginAPI.cerrarSesion();
-      this.$store.commit("cerrarSesion");
-      this.$router.push("/iniciar");
-    }
   }
-});
+  async cerrarSesion(): Promise<void> {
+    await LoginAPI.cerrarSesion();
+    this.$store.commit("cerrarSesion");
+    this.$router.push("/iniciar");
+  }
+}
 </script>
 
 <style scoped>

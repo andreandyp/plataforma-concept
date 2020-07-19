@@ -19,38 +19,38 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { CalificacionesAPI } from "../services/CalificacionesAPI";
-export default Vue.extend({
-  data() {
-    return {
-      cargando: false,
-      periodos: ["Materia", "1° parcial", "2° parcial", "3° parcial", "Extra", "Final"],
-      calificaciones: []
-    };
-  },
-  created() {
+import { Vue, Component } from "vue-property-decorator";
+import { CalificacionesAPI } from "@/services/CalificacionesAPI";
+import { CalificacionDB } from "@/utils/tipos";
+
+@Component
+export default class Alumno extends Vue {
+  cargando = false;
+  periodos: Array<string> = ["Materia", "1° parcial", "2° parcial", "3° parcial", "Extra", "Final"];
+  calificaciones: Array<CalificacionDB> = [];
+
+  created(): void {
     if (!this.$store.getters.sesionIniciada) {
-      return this.$router.replace("/");
+      this.$router.replace("/");
+      return;
     }
 
     if (this.$store.getters.tipoUsuario !== "alumno") {
-      return this.$router.replace("/");
-    }
-  },
-  mounted() {
-    // @ts-ignore
-    this.actualizarCalificaciones();
-  },
-  methods: {
-    async actualizarCalificaciones() {
-      this.$data.cargando = true;
-      const { message } = await CalificacionesAPI.obtenerCalificaciones();
-      this.$data.calificaciones = message;
-      this.$data.cargando = false;
+      this.$router.replace("/");
+      return;
     }
   }
-});
+  mounted(): void {
+    this.actualizarCalificaciones();
+  }
+
+  async actualizarCalificaciones(): Promise<void> {
+    this.cargando = true;
+    const { message } = await CalificacionesAPI.obtenerCalificaciones();
+    this.calificaciones = message;
+    this.cargando = false;
+  }
+}
 </script>
 
 <style scoped>

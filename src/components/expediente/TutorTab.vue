@@ -54,31 +54,29 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return {
-      tutor: {
-        nombres: "Fulano",
-        apellidoP: "X",
-        apellidoM: "X",
-        sexo: "Masculino",
-        parentesco: "Tal",
-        telefono: "5500000000",
-        correo: "correo@correo.com",
-        notas: "Ninguna",
-        domicilio: {
-          calle: "Por ahí",
-          nExterior: "123",
-          nInterior: "456",
-          entreCalles: "Esa y aquella",
-          colonia: "La escondida",
-          municipio: "Aquel",
-          entidad: "Ciudad de México",
-          cp: "00000"
-        }
-      }
-    };
-  }
-});
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class TutorTab extends Vue {
+  tutor = {
+    nombres: "Fulano",
+    apellidoP: "X",
+    apellidoM: "X",
+    sexo: "Masculino",
+    parentesco: "Tal",
+    telefono: "5500000000",
+    correo: "correo@correo.com",
+    notas: "Ninguna",
+    domicilio: {
+      calle: "Por ahí",
+      nExterior: "123",
+      nInterior: "456",
+      entreCalles: "Esa y aquella",
+      colonia: "La escondida",
+      municipio: "Aquel",
+      entidad: "Ciudad de México",
+      cp: "00000",
+    },
+  };
+}
 </script>
