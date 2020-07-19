@@ -9,9 +9,9 @@ export default new Vuex.Store({
       usuario: "",
       nombre: "",
       estado: "",
-      tipo: ""
+      tipo: "",
     },
-    cargando: false
+    cargando: false,
   },
   mutations: {
     iniciarSesion(state, sesion) {
@@ -22,9 +22,9 @@ export default new Vuex.Store({
         usuario: "",
         nombre: "",
         estado: "",
-        tipo: ""
+        tipo: "",
       };
-    }
+    },
   },
   getters: {
     sesionIniciada(state): boolean {
@@ -32,8 +32,8 @@ export default new Vuex.Store({
     },
     tipoUsuario(state): string {
       return state.sesion.tipo;
-    }
+    },
   },
   actions: {},
-  modules: {}
+  modules: {},
 });

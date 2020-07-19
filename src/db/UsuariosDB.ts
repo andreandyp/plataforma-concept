@@ -7,7 +7,7 @@ export const usuarios: Array<UsuarioDB> = [
     email: "andre@gmail.com",
     nombre: "André M.",
     estado: "Inscrito",
-    tipo: "alumno"
+    tipo: "alumno",
   },
   {
     usuario: "andy",
@@ -15,6 +15,6 @@ export const usuarios: Array<UsuarioDB> = [
     email: "andy@hotmail.com",
     nombre: "Andy P.",
     estado: null,
-    tipo: "profesor"
-  }
+    tipo: "profesor",
+  },
 ];

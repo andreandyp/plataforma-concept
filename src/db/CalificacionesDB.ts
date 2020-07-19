@@ -7,7 +7,7 @@ export const calificaciones: Array<CalificacionDB> = [
     periodo2: "-",
     periodo3: "-",
     extra: 9,
-    final: 9
+    final: 9,
   },
   {
     nombre: "Genética microbiana",
@@ -15,7 +15,7 @@ export const calificaciones: Array<CalificacionDB> = [
     periodo2: 9,
     periodo3: 8,
     extra: "NP",
-    final: 8
+    final: 8,
   },
   {
     nombre: "Resistencia de materiales",
@@ -23,7 +23,7 @@ export const calificaciones: Array<CalificacionDB> = [
     periodo2: 9,
     periodo3: 8,
     extra: "NP",
-    final: 9
+    final: 9,
   },
   {
     nombre: "Investigación de mercados turísticos",
@@ -31,7 +31,7 @@ export const calificaciones: Array<CalificacionDB> = [
     periodo2: 7,
     periodo3: 6,
     extra: 8,
-    final: 8
+    final: 8,
   },
   {
     nombre: "Propagación de ondas electromagnéticas",
@@ -39,7 +39,7 @@ export const calificaciones: Array<CalificacionDB> = [
     periodo2: 6,
     periodo3: 5,
     extra: 7,
-    final: 7
+    final: 7,
   },
   {
     nombre: "Métodos numéricos",
@@ -47,7 +47,7 @@ export const calificaciones: Array<CalificacionDB> = [
     periodo2: "-",
     periodo3: "-",
     extra: "NP",
-    final: 8
+    final: 8,
   },
   {
     nombre: "Mecánica cuántica y mecánica estadística",
@@ -55,6 +55,6 @@ export const calificaciones: Array<CalificacionDB> = [
     periodo2: "-",
     periodo3: "-",
     extra: "5",
-    final: 6
-  }
+    final: 6,
+  },
 ];

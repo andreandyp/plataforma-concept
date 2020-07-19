@@ -13,28 +13,28 @@ export class CalificacionesAPI {
 
     return {
       status: 200,
-      message: calificaciones
+      message: calificaciones,
     };
   }
   static async obtenerCalificacionesFinales(): Promise<DatosCalifFinales> {
     await sleep(1500);
     return {
       status: 200,
-      message: califFinales
+      message: califFinales,
     };
   }
   static async obtenerETS(): Promise<DatosETS> {
     await sleep(1500);
     return {
       status: 200,
-      message: ets
+      message: ets,
     };
   }
   static async obtenerKardex(): Promise<DatosKardex> {
     await sleep(1500);
     return {
       status: 200,
-      message: kardex
+      message: kardex,
     };
   }
 }

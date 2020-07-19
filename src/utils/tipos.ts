@@ -98,5 +98,5 @@ export {
   ETSDB,
   DatosETS,
   KardexDB,
-  DatosKardex
+  DatosKardex,
 };
