@@ -5,16 +5,19 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
-  created() {
-    if (!this.$store.getters.sesionIniciada) {
-      return this.$router.replace("/");
-    }
+import { Vue, Component } from "vue-property-decorator";
 
+@Component
+export default class Profesor extends Vue {
+  created(): void {
+    if (!this.$store.getters.sesionIniciada) {
+      this.$router.replace("/");
+      return;
+    }
     if (this.$store.getters.tipoUsuario !== "profesor") {
-      return this.$router.replace("/");
+      this.$router.replace("/");
+      return;
     }
   }
-});
+}
 </script>

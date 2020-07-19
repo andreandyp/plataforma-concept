@@ -22,53 +22,50 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { LoginAPI } from "../services/LoginAPI";
-export default Vue.extend({
-  data() {
-    return {
-      valido: false,
-      usuario: "",
-      correoRecuperacion: "",
-      usuarioValido: null,
-      usuarioNoExiste: null,
-      cargando: false,
-      reglas: {
-        usuarioVacio: (usuario: string): boolean | string => {
-          const blank = /\S+/;
-          return blank.test(usuario) || "Usuario incorrecto";
-        }
-      }
-    };
-  },
-  created() {
+import { Vue, Component } from "vue-property-decorator";
+import { LoginAPI } from "@/services/LoginAPI";
+
+@Component
+export default class Reestablecer extends Vue {
+  valido = false;
+  usuario = "";
+  correoRecuperacion = "";
+  usuarioValido: boolean | null = null;
+  usuarioNoExiste: boolean | null = null;
+  cargando = false;
+  reglas = {
+    usuarioVacio(usuario: string): boolean | string {
+      const blank = /\S+/;
+      return blank.test(usuario) || "Usuario incorrecto";
+    },
+  };
+  created(): void {
     if (this.$store.getters.sesionIniciada) {
-      return this.$router.replace("/");
-    }
-  },
-  methods: {
-    async enviarCodigo() {
-      (this.$refs.formUsuario as Vue & {
-        validate: () => boolean;
-      }).validate();
-
-      if (!this.$data.valido) {
-        return;
-      }
-
-      this.$data.cargando = true;
-      const { status, message } = await LoginAPI.reestablecerClave(this.$data.usuario.trim());
-      this.$data.cargando = false;
-
-      if (status !== 200) {
-        this.$data.usuarioNoExiste = true;
-      } else {
-        this.$data.usuarioValido = true;
-        this.$data.correoRecuperacion = message;
-      }
+      this.$router.replace("/");
+      return;
     }
   }
-});
+  async enviarCodigo(): Promise<void> {
+    (this.$refs.formUsuario as Vue & {
+      validate: () => boolean;
+    }).validate();
+
+    if (!this.valido) {
+      return;
+    }
+
+    this.cargando = true;
+    const { status, message } = await LoginAPI.reestablecerClave(this.usuario.trim());
+    this.cargando = false;
+
+    if (status !== 200) {
+      this.usuarioNoExiste = true;
+    } else {
+      this.usuarioValido = true;
+      this.correoRecuperacion = message;
+    }
+  }
+}
 </script>
 
 <style scoped>

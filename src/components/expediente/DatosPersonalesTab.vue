@@ -50,24 +50,22 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return {
-      boleta: "2020000000",
-      nombres: "Andre M.",
-      apellidoP: "P",
-      apellidoM: "N",
-      sexo: "Masculino",
-      fechaNacimiento: "01/01/1997",
-      curp: "ABCD000000HDFXX00",
-      rfc: "ABCD000000XX0",
-      telefono: "5500000000",
-      correo: "andreandyp@outlook.com",
-      pais: "México",
-      entidad: "CDMX",
-      nacionalidad: "Mexicana"
-    };
-  }
-});
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class DatosPersonalesTab extends Vue {
+  boleta = "2020000000";
+  nombres = "Andre M.";
+  apellidoP = "P";
+  apellidoM = "N";
+  sexo = "Masculino";
+  fechaNacimiento = "01/01/1997";
+  curp = "ABCD000000HDFXX00";
+  rfc = "ABCD000000XX0";
+  telefono = "5500000000";
+  correo = "andreandyp@outlook.com";
+  pais = "México";
+  entidad = "CDMX";
+  nacionalidad = "Mexicana";
+}
 </script>

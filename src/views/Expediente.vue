@@ -20,31 +20,30 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Vue, Component } from "vue-property-decorator";
 import SituacionEscolarTab from "@/components/expediente/SituacionEscolarTab.vue";
 import DatosPersonalesTab from "@/components/expediente/DatosPersonalesTab.vue";
 import DomicilioTab from "@/components/expediente/DomicilioTab.vue";
 import TutorTab from "@/components/expediente/TutorTab.vue";
 import DocumentosTab from "@/components/expediente/DocumentosTab.vue";
-export default Vue.extend({
-  data() {
-    return {
-      pestaña: "escolar"
-    };
-  },
-  created() {
-    if (!this.$route.hash) {
-      this.$router.replace({ hash: "#escolar" });
-    }
-  },
+
+@Component({
   components: {
     "situacion-escolar-tab": SituacionEscolarTab,
     "datos-personales-tab": DatosPersonalesTab,
     "domicilio-tab": DomicilioTab,
     "tutor-tab": TutorTab,
-    "documentos-tab": DocumentosTab
+    "documentos-tab": DocumentosTab,
+  },
+})
+export default class Expediente extends Vue {
+  pestaña = "escolar";
+  created(): void {
+    if (!this.$route.hash) {
+      this.$router.replace({ hash: "#escolar" });
+    }
   }
-});
+}
 </script>
 
 <style scoped></style>

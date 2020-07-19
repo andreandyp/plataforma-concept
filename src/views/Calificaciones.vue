@@ -79,50 +79,55 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { CalificacionesAPI } from "../services/CalificacionesAPI";
-export default Vue.extend({
-  data() {
-    return {
-      cargandoCalifs: false,
-      cargandoETS: false,
-      cargandoKardex: false,
-      etsHeaders: ["Periodo", "Tipo", "Materia", "Turno", "Calificación"],
-      examenesETS: [],
-      califHeaders: ["Materia", "Ordinario", "Extra", "ETS", "Final"],
-      califFinales: [],
-      kardexHeaders: ["Código", "Materia", "Periodo", "Aprobada en", "Calificación final"],
-      kardex: []
-    };
-  },
-  async mounted() {
+import { Vue, Component } from "vue-property-decorator";
+import { CalificacionesAPI } from "@/services/CalificacionesAPI";
+import { ETSDB, CalifFinalesDB, KardexDB } from "@/utils/tipos";
+
+@Component
+export default class Calificaciones extends Vue {
+  cargandoCalifs = false;
+  cargandoETS = false;
+  cargandoKardex = false;
+  etsHeaders: Array<string> = ["Periodo", "Tipo", "Materia", "Turno", "Calificación"];
+  examenesETS: Array<ETSDB> = [];
+  califHeaders: Array<string> = ["Materia", "Ordinario", "Extra", "ETS", "Final"];
+  califFinales: Array<CalifFinalesDB> = [];
+  kardexHeaders: Array<string> = [
+    "Código",
+    "Materia",
+    "Periodo",
+    "Aprobada en",
+    "Calificación final",
+  ];
+  kardex: Array<Array<KardexDB>> = [];
+
+  async mounted(): Promise<void> {
     await Promise.all([
       this.actualizarCalifFinales(),
       this.actualizarETS(),
-      this.actualizarKardex()
+      this.actualizarKardex(),
     ]);
-  },
-  methods: {
-    async actualizarETS() {
-      this.$data.cargandoETS = true;
-      const { message } = await CalificacionesAPI.obtenerETS();
-      this.$data.examenesETS = message;
-      this.$data.cargandoETS = false;
-    },
-    async actualizarCalifFinales() {
-      this.$data.cargandoCalifs = true;
-      const { message } = await CalificacionesAPI.obtenerCalificacionesFinales();
-      this.$data.califFinales = message;
-      this.$data.cargandoCalifs = false;
-    },
-    async actualizarKardex() {
-      this.$data.cargandoKardex = true;
-      const { message } = await CalificacionesAPI.obtenerKardex();
-      this.$data.kardex = message;
-      this.$data.cargandoKardex = false;
-    }
   }
-});
+
+  async actualizarETS(): Promise<void> {
+    this.cargandoETS = true;
+    const { message } = await CalificacionesAPI.obtenerETS();
+    this.examenesETS = message;
+    this.cargandoETS = false;
+  }
+  async actualizarCalifFinales(): Promise<void> {
+    this.cargandoCalifs = true;
+    const { message } = await CalificacionesAPI.obtenerCalificacionesFinales();
+    this.califFinales = message;
+    this.cargandoCalifs = false;
+  }
+  async actualizarKardex(): Promise<void> {
+    this.cargandoKardex = true;
+    const { message } = await CalificacionesAPI.obtenerKardex();
+    this.kardex = message;
+    this.cargandoKardex = false;
+  }
+}
 </script>
 
 <style scoped>

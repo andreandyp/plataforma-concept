@@ -30,19 +30,17 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
-  data() {
-    return {
-      calle: "Por ahí",
-      nExterior: "123",
-      nInterior: "456",
-      entreCalles: "Esa y aquella",
-      colonia: "La escondida",
-      municipio: "Aquel",
-      entidad: "Ciudad de México",
-      cp: "00000"
-    };
-  }
-});
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class DomicilioTab extends Vue {
+  calle = "Por ahí";
+  nExterior = "123";
+  nInterior = "456";
+  entreCalles = "Esa y aquella";
+  colonia = "La escondida";
+  municipio = "Aquel";
+  entidad = "Ciudad de México";
+  cp = "00000";
+}
 </script>

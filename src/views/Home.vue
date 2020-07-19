@@ -12,12 +12,15 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
-  created() {
+import { Vue, Component } from "vue-property-decorator";
+
+@Component
+export default class Home extends Vue {
+  created(): void {
     if (this.$store.getters.sesionIniciada) {
-      return this.$router.replace(`/${this.$store.getters.tipoUsuario}`);
+      this.$router.replace(`/${this.$store.getters.tipoUsuario}`);
+      return;
     }
   }
-});
+}
 </script>
