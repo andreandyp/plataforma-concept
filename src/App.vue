@@ -17,7 +17,7 @@
             v-icon mdi-book-account
           v-list-item-content
             v-list-item-title Calificaciones
-        v-list-item
+        v-list-item(to="/horario")
           v-list-item-icon
             v-icon mdi-table-clock
           v-list-item-content
@@ -38,7 +38,7 @@
         router-link.mr-2(to="/") Plataforma concept
       v-toolbar-items.hidden-xs-only(v-show="sesionIniciada")
         v-btn.text-capitalize(to="/calificaciones" text) Calificaciones
-        v-btn.text-capitalize(text) Horario
+        v-btn.text-capitalize(to="/horario" text) Horario
         v-btn.text-capitalize(text) Reinscripciones
         v-btn.text-capitalize(text) Evaluar profesores
 

@@ -101,12 +101,10 @@ export default class Calificaciones extends Vue {
   ];
   kardex: Array<Array<KardexDB>> = [];
 
-  async mounted(): Promise<void> {
-    await Promise.all([
-      this.actualizarCalifFinales(),
-      this.actualizarETS(),
-      this.actualizarKardex(),
-    ]);
+  mounted(): void {
+    this.actualizarCalifFinales();
+    this.actualizarETS();
+    this.actualizarKardex();
   }
 
   async actualizarETS(): Promise<void> {

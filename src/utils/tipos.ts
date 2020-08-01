@@ -85,6 +85,17 @@ type DatosKardex = {
   message: Array<Array<KardexDB>>;
 };
 
+type MateriaDB = {
+  nombre: string;
+  grupo: string;
+  horario: Array<string>;
+};
+
+type DatosMateria = {
+  status: number;
+  message: Array<MateriaDB>;
+};
+
 export {
   Notificacion,
   ResponseServer,
@@ -99,4 +110,6 @@ export {
   DatosETS,
   KardexDB,
   DatosKardex,
+  MateriaDB,
+  DatosMateria,
 };
