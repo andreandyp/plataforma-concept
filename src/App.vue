@@ -17,7 +17,7 @@
             v-icon mdi-book-account
           v-list-item-content
             v-list-item-title Calificaciones
-        v-list-item
+        v-list-item(to="/horario")
           v-list-item-icon
             v-icon mdi-table-clock
           v-list-item-content
@@ -27,7 +27,7 @@
             v-icon mdi-account-group
           v-list-item-content
             v-list-item-title Reinscripciones
-        v-list-item
+        v-list-item(to="/evaluar")
           v-list-item-icon
             v-icon mdi-teach
           v-list-item-content
@@ -38,9 +38,9 @@
         router-link.mr-2(to="/") Plataforma concept
       v-toolbar-items.hidden-xs-only(v-show="sesionIniciada")
         v-btn.text-capitalize(to="/calificaciones" text) Calificaciones
-        v-btn.text-capitalize(text) Horario
+        v-btn.text-capitalize(to="/horario" text) Horario
         v-btn.text-capitalize(text) Reinscripciones
-        v-btn.text-capitalize(text) Evaluar profesores
+        v-btn.text-capitalize(to="/evaluar" text) Evaluar profesores
 
       v-spacer
 
@@ -75,7 +75,7 @@
         a(href="https://twitter.com/andreandyp") Twitter
         |  | 
         a(href="https://github.com/andreandyp/plataforma-concept") GitHub
-        |  - Versión 0.4.2
+        |  - Versión 0.6.0
       v-spacer
       v-btn(color="blue" @click="cerrarSesion" v-show="sesionIniciada" text) Cerrar sesión
 </template>

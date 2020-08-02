@@ -40,6 +40,7 @@ export default class Alumno extends Vue {
       return;
     }
   }
+
   mounted(): void {
     this.actualizarCalificaciones();
   }

@@ -40,9 +40,24 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "calificaciones" */ "../views/Calificaciones.vue"),
   },
   {
+    path: "/horario",
+    name: "Horario",
+    component: () => import(/* webpackChunkName: "horario" */ "../views/Horario.vue"),
+  },
+  {
     path: "/expediente",
     name: "Expediente",
     component: () => import(/* webpackChunkName: "expediente" */ "../views/Expediente.vue"),
+  },
+  {
+    path: "/evaluar",
+    name: "Evaluar Profes",
+    component: () => import(/* webpackChunkName: "evaluarprofes" */ "../views/EvaluarProfes.vue"),
+  },
+  {
+    path: "/evaluar/:id",
+    name: "Evaluar",
+    component: () => import(/* webpackChunkName: "evaluarprofes" */ "../views/Evaluar.vue"),
   },
   {
     path: "/test",
