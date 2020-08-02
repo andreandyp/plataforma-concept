@@ -50,6 +50,16 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "expediente" */ "../views/Expediente.vue"),
   },
   {
+    path: "/evaluar",
+    name: "Evaluar Profes",
+    component: () => import(/* webpackChunkName: "evaluarprofes" */ "../views/EvaluarProfes.vue"),
+  },
+  {
+    path: "/evaluar/:id",
+    name: "Evaluar",
+    component: () => import(/* webpackChunkName: "evaluarprofes" */ "../views/Evaluar.vue"),
+  },
+  {
     path: "/test",
     name: "Test",
     component: () => import(/* webpackChunkName: "test" */ "../views/Test.vue"),

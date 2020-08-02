@@ -27,7 +27,7 @@
             v-icon mdi-account-group
           v-list-item-content
             v-list-item-title Reinscripciones
-        v-list-item
+        v-list-item(to="/evaluar")
           v-list-item-icon
             v-icon mdi-teach
           v-list-item-content
@@ -40,7 +40,7 @@
         v-btn.text-capitalize(to="/calificaciones" text) Calificaciones
         v-btn.text-capitalize(to="/horario" text) Horario
         v-btn.text-capitalize(text) Reinscripciones
-        v-btn.text-capitalize(text) Evaluar profesores
+        v-btn.text-capitalize(to="/evaluar" text) Evaluar profesores
 
       v-spacer
 

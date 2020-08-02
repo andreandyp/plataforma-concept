@@ -1,5 +1,5 @@
-import { sleep } from "../utils/funciones";
-import { DatosCalificacion, DatosETS, DatosCalifFinales, DatosKardex } from "../utils/tipos";
+import { sleep } from "@/utils/funciones";
+import { DatosCalificacion, DatosETS, DatosCalifFinales, DatosKardex } from "@/utils/tipos";
 
 // Importar datos falsos
 import { calificaciones } from "@/db/CalificacionesDB";

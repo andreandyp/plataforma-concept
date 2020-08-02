@@ -96,6 +96,17 @@ type DatosMateria = {
   message: Array<MateriaDB>;
 };
 
+type ProfesorDB = {
+  _id: number;
+  nombre: string;
+  status: number;
+};
+
+type DatosProfesor = {
+  status: number;
+  message: Array<ProfesorDB>;
+};
+
 export {
   Notificacion,
   ResponseServer,
@@ -112,4 +123,6 @@ export {
   DatosKardex,
   MateriaDB,
   DatosMateria,
+  ProfesorDB,
+  DatosProfesor,
 };
