@@ -75,7 +75,7 @@
         a(href="https://twitter.com/andreandyp") Twitter
         |  | 
         a(href="https://github.com/andreandyp/plataforma-concept") GitHub
-        |  - Versión 0.4.0
+        |  - Versión 0.6.0
       v-spacer
       v-btn(color="blue" @click="cerrarSesion" v-show="sesionIniciada" text) Cerrar sesión
 </template>
