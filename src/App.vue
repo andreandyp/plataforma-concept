@@ -22,11 +22,22 @@
             v-icon mdi-table-clock
           v-list-item-content
             v-list-item-title Horario
-        v-list-item
-          v-list-item-icon
-            v-icon mdi-account-group
-          v-list-item-content
-            v-list-item-title Reinscripciones
+        v-list-group(prepend-icon="mdi-account-group" color="white" no-action)
+          template(v-slot:activator)
+            v-list-item-content
+              v-list-item-title Reinscripciones
+          v-list-item(to="/reinscripciones/citas")
+            v-list-item-content
+              v-list-item-title Citas
+          v-list-item(to="/reinscripciones/ordinarias")
+            v-list-item-content
+              v-list-item-title Ordinarias
+          v-list-item(to="/reinscripciones/ets")
+            v-list-item-content
+              v-list-item-title ETS
+          v-list-item(to="/reinscripciones/fuera")
+            v-list-item-content
+              v-list-item-title Fuera del reglamento
         v-list-item(to="/evaluar")
           v-list-item-icon
             v-icon mdi-teach
@@ -39,7 +50,23 @@
       v-toolbar-items.hidden-xs-only(v-show="sesionIniciada")
         v-btn.text-capitalize(to="/calificaciones" text) Calificaciones
         v-btn.text-capitalize(to="/horario" text) Horario
-        v-btn.text-capitalize(text) Reinscripciones
+        v-menu(close-on-click close-on-content-click offset-y)
+          template(v-slot:activator="{ on, attrs }")
+            v-btn.text-capitalize(v-bind="attrs" v-on="on" text) Reinscripciones
+              v-icon(right) mdi-chevron-down    
+          v-list
+            v-list-item(to="/reinscripciones/citas")
+              v-list-item-content
+                v-list-item-title Citas
+            v-list-item(to="/reinscripciones/ordinarias")
+              v-list-item-content
+                v-list-item-title Ordinarias
+            v-list-item(to="/reinscripciones/ets")
+              v-list-item-content
+                v-list-item-title ETS
+            v-list-item(to="/reinscripciones/fuera")
+              v-list-item-content
+                v-list-item-title Fuera del reglamento
         v-btn.text-capitalize(to="/evaluar" text) Evaluar profesores
 
       v-spacer

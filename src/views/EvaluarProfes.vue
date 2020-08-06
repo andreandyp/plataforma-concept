@@ -1,5 +1,6 @@
 <template lang="pug">
   v-container
+    h1 Evalúa a tus profesores
     v-skeleton-loader(v-if="cargando" type="table-tbody" max-height="300")
     v-simple-table(v-else)
       thead

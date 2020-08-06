@@ -45,6 +45,26 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "horario" */ "../views/Horario.vue"),
   },
   {
+    path: "/reinscripciones/citas",
+    name: "CitasReinscripciones",
+    component: () => import(/* webpackChunkName: "citasR" */ "../views/CitasReinscripciones.vue"),
+  },
+  {
+    path: "/reinscripciones/ordinarias",
+    name: "OrdReinscripciones",
+    component: () => import(/* webpackChunkName: "ordR" */ "../views/OrdReinscripciones.vue"),
+  },
+  {
+    path: "/reinscripciones/ets",
+    name: "EtsReinscripciones",
+    component: () => import(/* webpackChunkName: "etsR" */ "../views/EtsReinscripciones.vue"),
+  },
+  {
+    path: "/reinscripciones/fuera",
+    name: "FueraReinscripciones",
+    component: () => import(/* webpackChunkName: "fueraR" */ "../views/FueraReinscripciones.vue"),
+  },
+  {
     path: "/expediente",
     name: "Expediente",
     component: () => import(/* webpackChunkName: "expediente" */ "../views/Expediente.vue"),

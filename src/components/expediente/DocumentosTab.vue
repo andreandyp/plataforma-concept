@@ -16,10 +16,10 @@
                 v-badge(:content="estadoDocumento(doc.status)" :color="colorEstado(doc.status)")
               td {{doc.notas}}
               td(v-if="doc.status === 3")
-                v-btn.primary(rounded link)
+                v-btn.primary(color="white" rounded link icon)
                   v-icon mdi-download
               td(v-else)
-                v-btn.primary(rounded link disabled)
+                v-btn(color="white" rounded link icon disabled)
                   v-icon mdi-download
 
 </template>
