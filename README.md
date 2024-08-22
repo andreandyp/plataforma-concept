@@ -1,3 +1,7 @@
+# ARCHIVADO
+
+Este proyecto no recibirá más actualizaciones. Ya no es de mi interés.
+
 # plataforma-concept
 
 El 1° de Julio del 2020, mi universidad lanzó una nueva versión de la página web que nos permite a los estudiantes consultar nuestra situación escolar, inscribir materias, ver nuestras calificaciones y otras cosas más.
